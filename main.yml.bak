@@ -7,6 +7,11 @@
  tasks:
   - include_role:
       name: common
+#  - name: enable repos
+#    template:
+#      src: /home/huwong-redhat.com/bad-ansible/3tier-bad/open_three-tier-app.repo
+#      dest: /etc/yum.repos.d/open_three-tier-app.repo
+#      mode: 0644
 
 - name: deploy haproxy
   hosts: frontends
@@ -16,6 +21,30 @@
   tasks:
   - include_role:
       name: frontends
+#  - name: http
+#    package:
+#      name: httpie
+#      state: latest
+#
+#  - name: install HAProxy
+#    yum:
+#      name: haproxy 
+#      state: latest
+#
+#  - name: enable HAProxy
+#    service:
+#      name: haproxy
+#      state: started
+#
+#  - name: configure haproxy
+#    template:
+#      src: ./haproxy.cfg.j2
+#      dest: /etc/haproxy/haproxy.cfg
+#
+#  - name: restart HAproxy
+#    service:
+#      name: haproxy
+#      state: restarted
 
 - name: deploy tomcat
   hosts: apps
