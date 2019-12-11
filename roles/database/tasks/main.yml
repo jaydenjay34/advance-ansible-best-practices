@@ -3,9 +3,14 @@
     name: postgresql-server
     state: latest
 
-- name: check if /var/lib/pgsql/data/ exist
+- name: start postgres
+  service:
+    name: postgresql.service
+    enabled: yes
+
+- name: check if /var/lib/pgsql/data/PG_VERSION exist
   stat: 
-    path: /var/lib/pgsql/data/
+    path: /var/lib/pgsql/data/PG_VERSION
   register: stat_results
 
 - name: initilize postgres

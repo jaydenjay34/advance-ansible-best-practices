@@ -1,4 +1,3 @@
-tasks:
 - name: http
   package:
     name: httpie
@@ -17,7 +16,7 @@ tasks:
 
 - name: configure haproxy
   template:
-    src: ../templates/haproxy.cfg.j2
+    src: templates/haproxy.cfg.j2
     dest: /etc/haproxy/haproxy.cfg
 
 - name: restart HAproxy
