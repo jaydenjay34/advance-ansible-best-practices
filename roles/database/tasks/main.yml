@@ -1,27 +1,24 @@
 - name: install postgres
-    yum:
-      name: postgresql-server
-      state: latest
+  yum:
+    name: postgresql-server
+    state: latest
 
-  - name: enable apache at boot
-    service:
-      name: postgresql
-      enabled: yes
+- name: check if /var/lib/pgsql/data/ exist
+  stat: 
+    path: /var/lib/pgsql/data/
+  register: stat_results
 
-  - name: tell user to finish setting up postgres
-    debug:
-      msg: "Either uncomment the postgres setup or manually login and initialize"
+- name: initilize postgres
+  command: postgresql-setup initdb
+  when: stat_results.stat.exists == False
+- name: initilize postgres some more
+  command: chkconfig postgresql on
+  when: stat_results.stat.exists == False
 
-     block:
-       - name: initilize postgres
-         command: postgresql-setup initdb
+- name: start postgres
+  service:
+    name: postgresql.service
+    state: started
+    enabled: yes
 
-       - name: initilize postgres some more
-         command: chkconfig postgresql on
-     when:
-
-     - name: start postgres
-       service:
-         name: postgresql.service
-         state: started
 

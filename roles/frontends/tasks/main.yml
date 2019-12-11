@@ -13,10 +13,11 @@ tasks:
   service:
     name: haproxy
     state: started
+    enabled: yes
 
 - name: configure haproxy
   template:
-    src: ./haproxy.cfg.j2
+    src: ../templates/haproxy.cfg.j2
     dest: /etc/haproxy/haproxy.cfg
 
 - name: restart HAproxy
