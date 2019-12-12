@@ -11,6 +11,11 @@ appdb1.1072.internal ansible_ssh_host=appdb1.1072.example.opentlc.com shortname=
 [support]
 support1.1072.internal ansible_ssh_host=support1.1072.example.opentlc.com
 
+[internal:children]
+frontends
+apps
+appdbs
+
 [internal:vars]
 GUID="{{ lookup('env', 'GUID') }}"
 
