@@ -1,13 +1,23 @@
-[3tierapp:vars]
-GUID=1072
-###########################################################################
-### Ansible Vars
-###########################################################################
-timeout=60
-ansible_become=yes
-ansible_user=ec2-user
-ansible_ssh_private_key_file="~/.ssh/1072key.pem"
-ansible_ssh_common_args="-o StrictHostKeyChecking=no"
+[frontends]
+#frontend1."{{ GUID }}".internal ansible_ssh_host=frontend1."{{ GUID }}".example.opentlc.com
+frontend1.1072.internal ansible_ssh_host=frontend1.1072.example.opentlc.com shortname=frontend1
+
+[apps]
+#app1."{{ GUID }}".internal ansible_ssh_host=app1."{{ GUID }}".example.opentlc.com
+#app2."{{ GUID }}".internal ansible_ssh_host=app2."{{ GUID }}".example.opentlc.com
+app1.1072.internal ansible_ssh_host=app1.1072.example.opentlc.com shortname=app1
+app2.1072.internal ansible_ssh_host=app2.1072.example.opentlc.com shortname=app2
+
+[appdbs]
+#appdb1."{{ GUID }}".internal ansible_ssh_host=appdb1."{{ GUID }}".example.opentlc.com
+appdb1.1072.internal ansible_ssh_host=appdb1.1072.example.opentlc.com shortname=appdb1
+
+[support]
+#support1."{{ GUID }}".internal ansible_ssh_host=support1."{{ GUID }}".example.opentlc.com
+support1.1072.internal ansible_ssh_host=support1.1072.example.opentlc.com
+
+[internal:vars]
+GUID="{{ lookup('env', 'GUID') }}"
 
 [3tierapp:children]
 frontends
@@ -15,23 +25,10 @@ apps
 appdbs
 support
 
-[frontends]
-## These are the frontends
-#frontend1."{{ GUID }}".internal ansible_ssh_host=frontend1."{{ GUID }}".example.opentlc.com
-frontend1.1072.internal ansible_ssh_host=frontend1.1072.example.opentlc.com
-
-[apps]
-## These are the apps
-#app1."{{ GUID }}".internal ansible_ssh_host=app1."{{ GUID }}".example.opentlc.com
-#app2."{{ GUID }}".internal ansible_ssh_host=app2."{{ GUID }}".example.opentlc.com
-app1.1072.internal ansible_ssh_host=app1.1072.example.opentlc.com
-app2.1072.internal ansible_ssh_host=app2.1072.example.opentlc.com
-
-[appdbs]
-## These are the appdbs
-appdb1."{{ GUID }}".internal ansible_ssh_host=appdb1."{{ GUID }}".example.opentlc.com
-
-## These are the support
-[support]
-support1."{{ GUID }}".internal ansible_ssh_host=support1."{{ GUID }}".example.opentlc.com
-
+[3tierapp:vars]
+GUID=1072
+timeout=60
+ansible_become=yes
+ansible_user=ec2-user
+ansible_ssh_private_key_file="~/.ssh/1072key.pem"
+ansible_ssh_common_args="-o StrictHostKeyChecking=no"
