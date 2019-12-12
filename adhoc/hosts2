@@ -1,14 +1,19 @@
 [frontends]
+#frontend1."{{ GUID }}".internal ansible_ssh_host=frontend1."{{ GUID }}".example.opentlc.com
 frontend1.1072.internal ansible_ssh_host=frontend1.1072.example.opentlc.com shortname=frontend1
 
 [apps]
+#app1."{{ GUID }}".internal ansible_ssh_host=app1."{{ GUID }}".example.opentlc.com
+#app2."{{ GUID }}".internal ansible_ssh_host=app2."{{ GUID }}".example.opentlc.com
 app1.1072.internal ansible_ssh_host=app1.1072.example.opentlc.com shortname=app1
 app2.1072.internal ansible_ssh_host=app2.1072.example.opentlc.com shortname=app2
 
 [appdbs]
+#appdb1."{{ GUID }}".internal ansible_ssh_host=appdb1."{{ GUID }}".example.opentlc.com
 appdb1.1072.internal ansible_ssh_host=appdb1.1072.example.opentlc.com shortname=appdb1
 
 [support]
+#support1."{{ GUID }}".internal ansible_ssh_host=support1."{{ GUID }}".example.opentlc.com
 support1.1072.internal ansible_ssh_host=support1.1072.example.opentlc.com
 
 [internal:vars]
@@ -21,6 +26,7 @@ appdbs
 support
 
 [3tierapp:vars]
+GUID=1072
 timeout=60
 ansible_become=yes
 ansible_user=ec2-user
